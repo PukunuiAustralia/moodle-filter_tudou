@@ -38,8 +38,8 @@ class filter_tudou extends moodle_text_filter {
         // One of the annoying things about tudou is the different ways it can link
         // to a video. So we'll add them to an array
         $search = array();
-        $search[] = "{<a.*?href=\".*?\.tudou\.com\/programs\/view\/(.*?)\/.*?[\?]?(d=\d+x\d+)?.*?<\/a>}";
-        $search[] = "{<a.*?href=\".*?\.tudou\.com\/listplay\/.*?\/(.*?)\.html.*?[\?]?(d=\d+x\d+)?.*?<\/a>}";
+        $search[] = "{<a.*?href=\".*?\.tudou\.com\/programs\/view\/([[:alnum:]]*)\/?.*?[\?]?(d=[[:digit:]]+x[[:digit:]]+)?.*?<\/a>}";
+        $search[] = "{<a.*?href=\".*?\.tudou\.com\/listplay\/.*?\/([[:alnum:]]*)\.html.*?[\?]?(d=[[:digit:]]+x[[:digit:]]+)?.*?<\/a>}";
         $text = preg_replace_callback($search, array($this, 'callback'), $text);
 
         return $text;
