@@ -103,7 +103,16 @@ class filter_tudou extends moodle_text_filter {
             }
         }
 
-        // Return the embed code
-        return '<embed src="http://www.tudou.com/v/'.$matches[1].'/v.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width="'.$w.'" height="'.$h.'"></embed>';
+        /// We use the object tag rather than the embed tag (as given by tudou) as it provides
+        /// better cross browser compatibility and html compliance
+        $embed = '<object
+                    type="application/x-shockwave-flash"
+                    data="http://www.tudou.com/v/'.$matches[1].'/v.swf"
+                    width="'.$w.'"
+                    height="'.$h.'">
+                    <param name="movie" value="http://www.tudou.com/v/'.$matches[1].'/v.swf">
+                  </object>';
+
+        return $embed;
     }
 }
